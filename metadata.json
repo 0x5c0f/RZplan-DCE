@@ -1,0 +1,6 @@
+{
+  "name": "DesignPrompt Studio · 智能UI/UX设计师提示词工程引擎",
+  "description": "面向AI前端开发的设计师提示词重塑与微交互编排工作台，将自然语言需求转化为工业级UI/UX交互规范、动效曲线与高质量AI代码生成提示词。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
