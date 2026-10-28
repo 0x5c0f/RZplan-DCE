@@ -1,0 +1,181 @@
+[
+  {
+    "id": "dashboard-loading",
+    "title": "01 数据唤醒 (Data Awakening)",
+    "shortTitle": "01 数据唤醒",
+    "category": "数据可视化",
+    "rawInput": "为Dashboard添加数据加载动效。页面进入时，核心指标从0平滑递增至目标数值，使用Ease Out缓动；趋势线从左向右逐步绘制，图表和指标依次出现，动画结束后保持稳定。",
+    "designerPrompt": "为 Dashboard 建立沉浸式数据唤醒时序 (Data Awakening Choreography)。【入场阶段】页面挂载后，容器骨架以 180ms 淡入，核心指标数字通过 requestAnimationFrame 从 0 平滑递增滚显至目标值，应用 Apple Ease-Out (cubic-bezier(0.16, 1, 0.3, 1)，持续 1.2s)；趋势折线使用 SVG stroke-dasharray/stroke-dashoffset 沿 X 轴自左向右渐进绘制 (延迟 80ms，耗时 900ms)。【时序错峰】多指标卡片采用 50ms 递进 Stagger 级联滑入 (y: 14px -> 0px, opacity: 0 -> 1)。【稳定态闭环】所有数值与图表渲染完毕后锁定稳定态，关键指标上方伴随 1.5s 柔和微光脉冲气泡指示最新增益，无多余二次抖动。",
+    "style": "linear-dark",
+    "motionTone": "apple-ease",
+    "icon": "BarChart3",
+    "highlightTags": ["数字递增滚显", "Ease-Out曲线", "SVG描边生长", "Stagger错峰", "稳定态微脉冲"],
+    "isQuickPick": true,
+    "archetype": "dashboard",
+    "sandboxData": {
+      "badge": "Ease Out 1.2s · SVG 描边生长 · 60ms 错峰",
+      "metric1Label": "平台总活跃用户 (Active Users)",
+      "metric1Target": 128420,
+      "metric1Gain": "+18.4%",
+      "metric1Cycle": "采样周期: 24h",
+      "metric2Label": "本月总营收 (Net Revenue)",
+      "metric2Target": 48290,
+      "metric2Prefix": "$",
+      "metric2Gain": "+24.1%",
+      "metric2Rate": "转化效率: 99.4%",
+      "chartLabel": "趋势折线自左向右描边绘制 (SVG Path Stroke-Dashoffset)"
+    }
+  },
+  {
+    "id": "modular-drag-drop",
+    "title": "02 模块自由拖拽 (Free Grid Drag & Drop)",
+    "shortTitle": "02 自由拖拽",
+    "category": "交互工作台",
+    "rawInput": "为Dashboard添加模块自由拖拽交互。按住卡片时悬浮放大，拖动时跟随鼠标，其他模块自动让位并平滑重排。松开后弹性吸附到网格，支持跨行跨列拖动，保持布局连续自然。",
+    "designerPrompt": "为 Dashboard 构建高响应度自由拖拽与动态网格排版系统。【按压与拾起】鼠标按住卡片 120ms 后触发拾起态，卡片产生 scale(1.03) 悬浮微升，阴影提升至 elevation-3 弥散投影，原网格槽位保留 1px 亚像素半透明虚线占位符 (Ghosting)。【平滑让位】拖拽过程中卡片严格跟随光标平滑位移，相邻受挤压卡片基于 FLIP 机制平滑让位重排 (持续 240ms，spring 物理缓动)，杜绝瞬移闪烁。【释放吸附】松开鼠标后卡片触发物理弹簧动力学 (stiffness: 400, damping: 25) 弹性吸附至最近网格坐标，支持跨行跨列无缝拖动，全程保持整体网格秩序连续自然。",
+    "style": "linear-dark",
+    "motionTone": "snappy-spring",
+    "icon": "Move",
+    "highlightTags": ["拾起悬浮提升", "FLIP平滑让位", "虚线占位符Ghosting", "弹性网格吸附", "跨行跨列排版"],
+    "isQuickPick": true,
+    "archetype": "dragdrop",
+    "sandboxData": {
+      "badge": "按压拾起 · FLIP 让位 · 弹簧磁吸网格",
+      "cards": [
+        { "id": "card-1", "title": "🚀 核心交付里程碑 (v1.0.0)", "badge": "已就绪", "desc": "包含 7 大原子交互原语的物理模型调优与无障碍减速回退", "stat": "Sprint 1 · 100% 完成" },
+        { "id": "card-2", "title": "⚡ API 网关高并发吞吐", "badge": "健康", "desc": "Edge 边缘节点动态流式缓冲，压测延迟稳定在 12ms 内", "stat": "99.98% 可用性 · 1.2k QPS" },
+        { "id": "card-3", "title": "🎨 设计系统组件库审查", "badge": "待审核", "desc": "Linear 暗黑与 Apple 极简白双主题 CSS Token 边界校准", "stat": "14 个新组件待合并" },
+        { "id": "card-4", "title": "👥 核心工程师资源分配", "badge": "活跃", "desc": "跨项目算力调度与 DeepSeek-Flash 模型并发配额监控", "stat": "6 位资深工程师在线" }
+      ]
+    }
+  },
+  {
+    "id": "card-3d-flip",
+    "title": "03 卡片3D悬浮翻转 (3D Parallax & Flip)",
+    "shortTitle": "03 3D悬浮翻转",
+    "category": "3D空间与卡片",
+    "rawInput": "为Dashboard卡片添加3D翻转交互。悬停时卡片上浮，并跟随鼠标产生3D倾斜。点击后沿Y轴平滑翻转180度，正面展示核心指标，背面展示详细图表。加入透视、动态阴影和弹性缓动。",
+    "designerPrompt": "打造极具空间深度的 3D 悬浮视差与正反双面翻转卡片。【三维视距】父容器声明 perspective: 1000px，卡片容器开启 transform-style: preserve-3d，正反面元素设置 backface-visibility: hidden。【视差倾斜】悬停时卡片浮起 (translateZ: 12px)，依据光标相对中心坐标动态驱动 rotateX/rotateY (限幅 ±7deg)，并在表层映射动态径向反射光泽。【Y轴翻转】点击触发沿 Y 轴 180° 平滑翻转，采用 Spring 弹性缓动 (耗时 650ms，带轻微回弹)；翻转过程中投射随角度形变的动态接触阴影；正面呈现核心指标概览，背面无缝呈现高密度趋势图表与明细数据。",
+    "style": "linear-dark",
+    "motionTone": "snappy-spring",
+    "icon": "Rotate3d",
+    "highlightTags": ["Perspective透视", "光标视差倾斜", "3D动态光泽", "Y轴180°翻转", "Backface隐藏"],
+    "isQuickPick": true,
+    "archetype": "card3d",
+    "sandboxData": {
+      "badge": "Perspective 1000px · ±7° 倾斜视差 · Y-180° 双面翻转",
+      "front": {
+        "badge": "顺丰特快 · 运输中",
+        "productName": "MacBook Pro M4 Max (纳米纹理)",
+        "price": "¥27,999",
+        "subtitle": "订单编号: #ORD-2026-98104 · 触感平滑微倾角 ±7deg",
+        "footerAction": "查看物流时间轴与硬件跑分 →"
+      },
+      "back": {
+        "badge": "Backface Active",
+        "title": "物流追踪节点 & 跑分明细",
+        "timeline": [
+          { "time": "18:30", "status": "已到达北京大兴转运中心" },
+          { "time": "14:15", "status": "快件在上海浦东已装车发出" },
+          { "time": "09:00", "status": "包裹已由顺丰特快揽收完毕" }
+        ],
+        "benchmarks": [
+          { "name": "M4 CPU", "val": "98%" },
+          { "name": "GPU 渲染", "val": "94%" },
+          { "name": "SSD 读写", "val": "99%" }
+        ]
+      }
+    }
+  },
+  {
+    "id": "card-spatial-expand",
+    "title": "04 卡片空间展开 (Spatial Expansion)",
+    "shortTitle": "04 空间原位展开",
+    "category": "交互工作台",
+    "rawInput": "为Dashboard添加卡片空间展开交互。点击时卡片从原位置扩展成完整今日任务面板，里面卡片横向拍列一行展示4个，超4个折行，周围模块同步退让、背景淡化，内部信息逐层出现。关闭时沿原路径自然收回，保持空间连续性。",
+    "designerPrompt": "实现具备极高空间连续性的卡片原位形态扩展 (Shared Element Spatial Expansion)。【原位展开】点击触发卡片以 boundingClientRect 坐标为基准触发共享元素平滑形变 (基于 View Transitions / FLIP 几何变换原理)，直接由紧凑指标卡平滑膨胀为居中全尺寸「今日任务面板」，严禁弹出瞬切遮罩。【环境退让】周围兄弟卡片与背景在 200ms 内同步以 scale(0.97) 退让并叠加 8px 高斯模糊与 40% 减光遮罩。【多列折行】展开面板内任务子卡片采用 CSS Grid 弹性响应排版，固定单行 4 列布局，超出 4 个自动流式折行；任务项伴随 35ms Stagger 瀑布式入场。【逆向收折】点击关闭按钮或按 Escape 键，面板沿展开原物理轨迹逆向坍缩吸附回原位卡片槽位，背景退让瞬时复原，达成零断层空间闭环。",
+    "style": "linear-dark",
+    "motionTone": "apple-ease",
+    "icon": "Maximize2",
+    "highlightTags": ["Shared Element共享元素", "原位平滑膨胀", "环境减光退让", "单行4列响应折行", "逆向轨迹收回"],
+    "isQuickPick": true,
+    "archetype": "expand",
+    "sandboxData": {
+      "badge": "Shared Element 原位平滑形变 · 4 列弹性折行",
+      "cardTitle": "今日重点推进任务 (4 项紧急待交付)",
+      "cardSubtitle": "点击卡片体验原位物理膨胀与背景高斯模糊退让",
+      "missions": [
+        { "title": "微交互弹性阻尼参数标定", "tag": "动效系统", "status": "进行中", "priority": "P0" },
+        { "title": "跨框架适配规范文档输出", "tag": "架构设计", "status": "已完成", "priority": "P1" },
+        { "title": "高对比暗黑主题色彩核验", "tag": "视觉规范", "status": "待审查", "priority": "P1" },
+        { "title": "多端键盘无障碍 Tab 导航", "tag": "A11y 体验", "status": "排期中", "priority": "P2" }
+      ]
+    }
+  },
+  {
+    "id": "cards-3d-stack",
+    "title": "05 一键聚合 (3D Stacking & Radial Burst)",
+    "shortTitle": "05 一键3D聚合",
+    "category": "3D空间与卡片",
+    "rawInput": "为Dashboard添加一键聚合交互。点击时所有卡片向中心移动、缩小并形成3D堆叠。再次点击，卡片向四周弹性散开，恢复原布局。使用FLIP布局动画和3D空间变换，保证运动连续自然。",
+    "designerPrompt": "设计极具未来感的 Dashboard 一键聚合与径向散射双态状态机 (Bi-stable Morphing State Machine)。【状态 A -> B：向心堆叠】点击聚合按钮，全屏卡片利用 FLIP 机制向视口中心平滑向心位移并按 0.85 比例等比收拢；根据卡片索引自动分配 Z 轴层叠与伪随机物理微偏角 (如：Index 0: rotate 0deg, z: 24px; Index 1: rotate -3.5deg, z: 16px; Index 2: rotate 3deg, z: 8px)，呈现真实物理纸牌立体堆叠质感。【状态 B -> A：径向散射】再次点击时触发高刚度回弹物理弹簧 (stiffness: 450, damping: 22)，卡片呈径向弹性迸发散开，丝滑归位至各自原始网格坐标；全程基于 GPU transform/opacity 硬件加速，保证 60fps 丝滑连贯。",
+    "style": "linear-dark",
+    "motionTone": "snappy-spring",
+    "icon": "Layers",
+    "highlightTags": ["双态状态机", "向心3D纸牌堆叠", "微偏角物理层叠", "径向弹性迸发", "FLIP无缝归位"],
+    "isQuickPick": true,
+    "archetype": "stack",
+    "sandboxData": {
+      "badge": "双态状态机 · 空间扑克纸牌叠放 vs 径向迸发",
+      "cards": [
+        { "name": "Black Obsidian VIP (无限黑卡)", "num": "•••• 8899", "color": "from-slate-900 to-indigo-950", "border": "border-indigo-500/40" },
+        { "name": "Apple Titanium Card (钛金卡)", "num": "•••• 4201", "color": "from-slate-800 to-slate-900", "border": "border-slate-700" },
+        { "name": "Emerald Private Reserve (翡翠私享)", "num": "•••• 7312", "color": "from-emerald-950 to-slate-900", "border": "border-emerald-500/40" }
+      ]
+    }
+  },
+  {
+    "id": "ai-chat-streaming",
+    "title": "06 AI 流式生成与深度思考微动效",
+    "shortTitle": "06 AI 流式思考",
+    "category": "AI 交互",
+    "rawInput": "做一个AI聊天窗口，回答的时候要流式打字，有思考过程动画。",
+    "designerPrompt": "构建极具呼吸感的高级 AI 对话界面。当模型处于推理阶段时，展示带微光脉冲的思考状态卡片 (Shimmer 骨架流光，周期 1.8s，透明度在 0.35 与 0.7 之间平滑过渡)；进入生成阶段时，字符以 Token 块伴随轻微渐显微浮动 (opacity: 0 -> 1, translateY: 3px -> 0px) 逐帧呈现；视口保持阻尼平滑滚动锁定底部，悬浮控制栏包含磁吸感「中断/重试」胶囊按钮。",
+    "style": "linear-dark",
+    "motionTone": "micro-delight",
+    "icon": "MessageSquare",
+    "highlightTags": ["骨架流光Shimmer", "Token渐显浮动", "阻尼平滑贴底", "呼吸状态指示"],
+    "isQuickPick": false,
+    "archetype": "streaming",
+    "sandboxData": {
+      "badge": "Shimmer 呼吸骨架流光 · 字符打字机流 · 终端脉冲游标",
+      "aiRole": "DesignCraftsman AI 架构智能体",
+      "sampleStream": "为保证 60fps 丝滑帧率，系统采用 FLIP (First, Last, Invert, Play) 算法接管 DOM 几何变换，核心数值递增通过 requestAnimationFrame 驱动三次贝塞尔缓动，零生硬闪烁。已注入 prefers-reduced-motion 无障碍降级规范。"
+    }
+  },
+  {
+    "id": "command-palette-k",
+    "title": "07 全局快速指令面板 (⌘K Command Palette)",
+    "shortTitle": "07 ⌘K 指令中心",
+    "category": "系统导航",
+    "rawInput": "加一个全局搜索弹出框，按快捷键出来，可以用方向键选。",
+    "designerPrompt": "实现全局极速指令中心 (⌘K)。按下快捷键时，页面背景叠加上 8px 高斯模糊并以 120ms 淡入深色遮罩；中心搜索窗口以 Spring 曲线 (stiffness: 420, damping: 30) 从 scale(0.95) 展开至原尺寸。输入框自带呼吸态高亮边框；方向键导航时，选中游标使用弹性平滑滑动定位至目标项，附带微妙的按压缩放反馈 (scale: 0.985)。",
+    "style": "linear-dark",
+    "motionTone": "snappy-spring",
+    "icon": "Search",
+    "highlightTags": ["高斯模糊遮罩", "Spring弹出比例", "游标弹性定位", "高对比微渐变"],
+    "isQuickPick": false,
+    "archetype": "command-palette",
+    "sandboxData": {
+      "badge": "Spring 曲线 (stiffness: 420, damping: 30) · 8px 高斯模糊 · 游标平滑滑动",
+      "placeholder": "输入指令或按上下方向键浏览...",
+      "commands": [
+        { "title": "重塑为工业级设计师提示词", "shortcut": "↵ Enter", "category": "核心操作" },
+        { "title": "切换视觉设计风格为 Linear.app 暗黑极客", "shortcut": "⌥ 1", "category": "设计流派" },
+        { "title": "启动交互沙盒物理双轨手感对比", "shortcut": "⌥ S", "category": "物理实验" },
+        { "title": "复制下游 Cursor .cursorrules 交付规则", "shortcut": "⌘ C", "category": "AI 交付" },
+        { "title": "检索经典开源提示词预设库", "shortcut": "⌘ P", "category": "预设库" }
+      ]
+    }
+  }
+]

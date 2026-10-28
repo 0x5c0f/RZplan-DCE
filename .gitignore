@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing & Coverage
+coverage/
+.playwright-cli/
+*.log
+
+# Production Builds
+dist/
+build/
+
+# Environment Variables & Secrets
+.env*
+!.env.example
+
+# AI Studio Platform & Automation Artifacts
+.aistudio/
+.tempmediaStorage/
+screenshot*.png
+*.png
+
+# Redundant Lockfiles (Project standard is package-lock.json)
+bun.lock
+yarn.lock
+pnpm-lock.yaml
+
+# OS & Editor Metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
