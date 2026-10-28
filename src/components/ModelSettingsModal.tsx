@@ -366,20 +366,31 @@ export const ModelSettingsModal: React.FC<ModelSettingsModalProps> = ({
                       key={p.name}
                       type="button"
                       onClick={() => handleSelectPreset(p)}
-                      className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs bg-slate-50 dark:bg-slate-950 hover:bg-purple-50 dark:hover:bg-purple-950/40 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-600/40 transition-all text-left cursor-pointer group"
+                      className="flex flex-col gap-1.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-purple-50/70 dark:hover:bg-purple-950/40 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-600/40 transition-all text-left cursor-pointer group shadow-2xs"
                     >
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-purple-500"></span>
-                        <span className="font-semibold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
-                          {p.name}
-                        </span>
-                        <span className="font-mono text-[11px] text-purple-600 dark:text-purple-300 bg-purple-100 dark:bg-purple-500/20 px-2 py-0.5 rounded-md">
-                          {p.defaultModel}
+                      {/* Top Row: Provider Name + Model Badge + Action Pill */}
+                      <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></span>
+                          <span className="font-semibold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 text-xs">
+                            {p.name}
+                          </span>
+                          <span className="font-mono text-[11px] font-medium text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-500/20 px-2 py-0.5 rounded-md whitespace-nowrap">
+                            {p.defaultModel}
+                          </span>
+                        </div>
+                        <span className="text-[10px] text-purple-600 dark:text-purple-400 font-medium bg-purple-100/60 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 px-2 py-0.5 rounded-md flex items-center gap-1 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                          <span>载入预设</span>
+                          <span>→</span>
                         </span>
                       </div>
-                      <span className="text-[11px] text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 hidden sm:inline">
-                        {p.description || '官方兼容端点'}
-                      </span>
+
+                      {/* Bottom Row: Full Description (No collision, full-width) */}
+                      {p.description && (
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 leading-relaxed pl-4">
+                          {p.description}
+                        </p>
+                      )}
                     </button>
                   ))}
                 </div>
